@@ -8,20 +8,13 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      firstName: { type: Sequelize.STRING, allowNull: true },
-      lastName: { type: Sequelize.STRING, allowNull: true },
-      username: {
+      names: { type: Sequelize.STRING, allowNull: true },
+      technology: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
         required: true
       },
-      password: {
+      country: {
         type: Sequelize.STRING,
         allowNull: false,
         required: true
@@ -30,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      phone: {
+      biography: {
         type: Sequelize.STRING,
         allowNull: true
       },

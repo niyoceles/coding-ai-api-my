@@ -7,21 +7,14 @@ export default (sequelize, DataTypes) => {
       primaryKey: true
     },
 
-    firstName: { type: DataTypes.STRING },
-    lastName: { type: DataTypes.STRING },
+    names: { type: DataTypes.STRING },
 
-    username: {
+    technology: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
       required: true
     },
-    password: {
+    country: {
       type: DataTypes.STRING,
       allowNull: false,
       required: true
@@ -30,7 +23,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    phone: {
+    biography: {
       type: DataTypes.STRING,
       allowNull: true
     },
