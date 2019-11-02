@@ -7,19 +7,23 @@ class mentorController {
     const {
       names, technology, country, biography, facebook, twitter, linkedIn, instagram
     } = req.body;
+    const { username } = req.decodedToken;
     try {
-      const newMentor = await Mentors.create({
-        names,
-        technology,
-        country,
-        biography,
-        facebook,
-        twitter,
-        linkedIn,
-        instagram
+      const newMentor = await Mentors.findOrCreate({
+        where: { username },
+        defaults: {
+          names,
+          technology,
+          country,
+          biography,
+          facebook,
+          twitter,
+          linkedIn,
+          instagram
+        }
       });
       return res.status(200).json({
-        Mentor: newMentor,
+        mentor: newMentor,
         message: 'successful mentor accepted',
       });
 
@@ -32,6 +36,7 @@ class mentorController {
     const {
       names, technology, country, biography, facebook, twitter, linkedIn, instagram
     } = req.body;
+    const { username } = req.decodedToken;
     const { id } = req.params;
     try {
       const updateMentor = await Mentors.update({
@@ -44,11 +49,11 @@ class mentorController {
         linkedIn,
         instagram
       },
-      {
-        where: {
-          id
-        },
-      });
+        {
+          where: {
+            id, username
+          },
+        });
       if (!updateMentor) {
         return res.status(404).json({
           error: 'Failed to update mentor'
@@ -83,10 +88,11 @@ class mentorController {
 
   static async deleteMentor(req, res) {
     const { id } = req.params;
+    const { username } = req.decodedToken;
     try {
       const delMentor = await Mentors.destroy({
         where: {
-          id
+          id, username
         },
       });
       if (!delMentor) {
