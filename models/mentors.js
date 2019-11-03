@@ -6,7 +6,13 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true
     },
-
+    username: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'User',
+        key: 'username'
+      }
+    },
     names: { type: DataTypes.STRING },
 
     technology: {
@@ -44,5 +50,8 @@ export default (sequelize, DataTypes) => {
       allowNull: true
     },
   }, {});
+  mentors.associate = (models) => {
+    mentors.belongsTo(models.User, { as: 'user', foreignKey: 'username' });
+  };
   return mentors;
 };
